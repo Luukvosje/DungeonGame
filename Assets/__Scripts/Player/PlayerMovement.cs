@@ -14,6 +14,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Animations")]
     [SerializeField] private Animator playerAnim;
+    [SerializeField] private GameObject spriteRenderer;
+
+    [Header("Looking")]
+    public static int lookingDir;
 
 
     private void Awake()
@@ -35,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //MovementOutput
-        rb.velocity = movementVector * speed * Time.fixedDeltaTime;
+        rb.velocity = movementVector.normalized * speed * Time.fixedDeltaTime;
         WalkAnimationManager();
     }
 
@@ -57,11 +61,23 @@ public class PlayerMovement : MonoBehaviour
         //Checking if Moving
         if (movementVector.y > 0)
         {
+            lookingDir = 2;
             playerAnim.SetBool("MovingBack", true);
         }
         else
         {
+            lookingDir = 3;
             playerAnim.SetBool("MovingBack", false);
+        }
+        if (movementVector.x < 0)
+        {
+            spriteRenderer.transform.localScale = new Vector2(-1, 1);
+            lookingDir = 0;
+        }
+        else if (movementVector.x > 0)
+        {
+            lookingDir = 1;
+            spriteRenderer.transform.localScale = new Vector2(1, 1);
         }
     }
 
