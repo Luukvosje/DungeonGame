@@ -15,9 +15,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("Animations")]
     [SerializeField] private Animator playerAnim;
     [SerializeField] private GameObject spriteRenderer;
+    private bool collided;
 
-    [Header("Looking")]
-    public static int lookingDir;
+    [Header("Looking / Weapon")]
+    [SerializeField] private int lookingDir;
+    [SerializeField] private int lookdir;
+    private WeaponController weaponController;
 
 
     private void Awake()
@@ -28,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        weaponController = GetComponent<WeaponController>();
     }
 
     private void Update()
@@ -50,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void WalkAnimationManager()
     {
+        lookdir = lookingDir;
         if (movementVector.x == 0 && movementVector.y == 0)
         {
             playerAnim.SetBool("StandingStill", true); 
@@ -79,6 +84,20 @@ public class PlayerMovement : MonoBehaviour
             lookingDir = 1;
             spriteRenderer.transform.localScale = new Vector2(1, 1);
         }
+        if (lookingDir != lookdir)
+        {
+            Debug.Log("hi");
+            weaponController.ChangeWeaponPos(lookingDir);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        collided = true;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        collided = false;
     }
 
 }

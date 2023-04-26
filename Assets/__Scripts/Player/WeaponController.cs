@@ -6,42 +6,52 @@ public class WeaponController : MonoBehaviour
 {
     [SerializeField] private GameObject weaponRenderer;
 
-    void Start()
-    {
-        
-    }
+    private Vector3 oldPos, newPos, oldRot, newRot;
 
-    // Update is called once per frame
-    void Update()
-    {
-        ChangeWeaponPos();
-    }
 
-    void ChangeWeaponPos()
+
+    public void ChangeWeaponPos(int newLook)
     {
-        switch (PlayerMovement.lookingDir)
+        oldPos = weaponRenderer.transform.localPosition;
+        oldRot = weaponRenderer.transform.eulerAngles;
+        switch (newLook)
         {
             case 0:
 
                 //Left
-                weaponRenderer.transform.localPosition = new Vector3(-1, 0);
-                weaponRenderer.transform.eulerAngles = new Vector3(0, 0, 90);
+                newPos = new Vector3(-1, 0);
+                newRot = new Vector3(0, 0, 90);
                 break;
             case 1:
                 //Right
-                weaponRenderer.transform.localPosition = new Vector3(1, 0);
-                weaponRenderer.transform.eulerAngles = new Vector3(0, 0, -90);
+                newPos = new Vector3(1, 0);
+                newRot = new Vector3(0, 0, -90);
                 break;
             case 2:
-                //Back
-                weaponRenderer.transform.localPosition = new Vector3(0, -1);
-                weaponRenderer.transform.eulerAngles = new Vector3(0, 0, 180);
+                //front
+                newPos = new Vector3(0, 1);
+                newRot = new Vector3(0, 0, 0);
                 break;
             case 3:
-                //Front
-                weaponRenderer.transform.localPosition = new Vector3(0, 1);
-                weaponRenderer.transform.eulerAngles = new Vector3(0, 0, 0);
+                //back
+                newPos = new Vector3(0, -1);
+                newRot = new Vector3(0, 0, 180);
                 break;
+        }
+        StartCoroutine(ChangePos());
+    }
+
+    private IEnumerator ChangePos()
+    {
+        float duration = 0.1f;
+        float currentTime = 0f;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            weaponRenderer.transform.localPosition = Vector2.Lerp(oldPos, newPos, currentTime / duration);
+            weaponRenderer.transform.eulerAngles = Vector3.Lerp(oldRot, newRot, currentTime / duration);
+            yield return null;
         }
     }
 }
