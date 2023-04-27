@@ -15,7 +15,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Animations")]
     [SerializeField] private Animator playerAnim;
     [SerializeField] private GameObject spriteRenderer;
-    private bool collided;
+    [SerializeField] private bool collided;
+    [SerializeField] private float raycastDistance = 1f;
+    [SerializeField] private LayerMask wallLayer;
 
     [Header("Looking / Weapon")]
     [SerializeField] private int lookingDir;
@@ -39,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
         //MovementInput
         Movement();
     }
-
     private void FixedUpdate()
     {
         //MovementOutput
@@ -51,13 +52,15 @@ public class PlayerMovement : MonoBehaviour
     {
         movementVector.x = Input.GetAxisRaw("Horizontal");
         movementVector.y = Input.GetAxisRaw("Vertical");
+
     }
     private void WalkAnimationManager()
     {
+ 
         lookdir = lookingDir;
         if (movementVector.x == 0 && movementVector.y == 0)
         {
-            playerAnim.SetBool("StandingStill", true); 
+            playerAnim.SetBool("StandingStill", true);
             return;
         }
         else
@@ -89,15 +92,19 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("hi");
             weaponController.ChangeWeaponPos(lookingDir);
         }
+        //RayCollisionCheck();
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    //Stop Animation when collided
+    private void RayCollisionCheck()
     {
-        collided = true;
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        collided = false;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, movementVector, raycastDistance, wallLayer);
+        if (hit.collider != null)
+        {
+            playerAnim.SetBool("StandingStill", true);
+            return;
+        }
+        //else
+        //    playerAnim.SetBool("StandingStill", true);
     }
 
 }
