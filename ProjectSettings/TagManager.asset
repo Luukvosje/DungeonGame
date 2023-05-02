@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Farming
   layers:
   - Default
   - TransparentFX
@@ -11,8 +12,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Collision
+  - Farming
   - 
   - 
   - 
@@ -40,6 +41,12 @@ TagManager:
   m_SortingLayers:
   - name: Ground
     uniqueID: 3813831661
+    locked: 0
+  - name: Collision
+    uniqueID: 5685065
+    locked: 0
+  - name: Farming
+    uniqueID: 3329345371
     locked: 0
   - name: Default
     uniqueID: 0

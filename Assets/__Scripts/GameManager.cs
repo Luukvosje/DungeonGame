@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+    [SerializeField] private LayerMask Collsion;
     void Update()
     {
         foreach (var item in FindObjectsOfType<SpriteRenderer>())
         {
-            item.sortingOrder = (int)(item.gameObject.transform.position.y * -100);
+            if(item.sortingLayerID != Collsion)
+                item.sortingOrder = (int)(item.gameObject.transform.position.y * -100);
         }
     }
 }
