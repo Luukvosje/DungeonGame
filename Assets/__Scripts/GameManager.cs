@@ -5,13 +5,5 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    [SerializeField] private LayerMask Collsion;
-    void Update()
-    {
-        foreach (var item in FindObjectsOfType<SpriteRenderer>())
-        {
-            if(item.sortingLayerID != Collsion)
-                item.sortingOrder = (int)(item.gameObject.transform.position.y * -100);
-        }
-    }
+
 }
