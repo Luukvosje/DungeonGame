@@ -29,6 +29,7 @@ public class FarmingScript : MonoBehaviour
                     GetComponent<SpriteRenderer>().sprite = controller.hoveringSprite;
                 if (Input.GetMouseButton(0) && !occupied)
                 {
+                    anim.SetBool("Harvesting", false);
                     anim.SetTrigger("SpawnAnim");
                     growthCounter = controller._dayCount;
                     seedState = 0;
@@ -41,9 +42,9 @@ public class FarmingScript : MonoBehaviour
             if (controller.currentToolState == Tools.Harvesting && grown)
             {
                 GetComponent<SpriteRenderer>().sprite = controller.hoveringSprite;
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0) && occupied)
                 {
-                    anim.SetTrigger("HarverstAnim");
+                    anim.SetBool("Harvesting", true);
                     GetComponent<SpriteRenderer>().sprite = null;
                 }
             }
@@ -82,5 +83,6 @@ public class FarmingScript : MonoBehaviour
         seedSpriteHolder.GetComponent<SpriteRenderer>().sprite = null;
         seedState = 0;
         occupied = false;
+
     }
 }
