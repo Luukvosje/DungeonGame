@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int lookdir;
     private WeaponController weaponController;
 
+    [Header("NPC / Interaction")]
+    public bool talking;
+
 
     private void Awake()
     {

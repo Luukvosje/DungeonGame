@@ -1,0 +1,144 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DungeonGridGeneration : MonoBehaviour
+{
+    private int gridX, gridY;
+    [SerializeField] private int gridSpaceX, gridSpaceY;
+    [SerializeField] private GameObject gridHolder;
+
+    [SerializeField] private int DungeonAmount;
+    private int roomCount;
+
+    public List<DungeonTile> tiles = new List<DungeonTile>();
+    public List<DungeonTile> roomList = new List<DungeonTile>();
+
+    [SerializeField] private Vector2 currentTile;
+    [SerializeField] private Vector2 checkTile;
+    private DungeonTile oldTile;
+    public int lastdir = 0;
+
+
+    void Start()
+    {
+        //Zorgt ervoor dat er niet meer kamers kunnen zijn dan gridtiles
+        gridX = DungeonAmount;
+        gridY = DungeonAmount;
+        roomCount = 0;
+        FindObjectOfType<DungeonManager>().endRoom = DungeonAmount;
+
+        for (int x = 0; x < gridX; x++)
+        {
+            for (int y = 0; y < gridY; y++)
+            {
+               GameObject tmpTile = Instantiate(gridHolder, new Vector3(0 + gridSpaceX * x, 0 + gridSpaceY * y, 0), Quaternion.identity);
+                tmpTile.GetComponent<DungeonTile>().x = x;
+                tmpTile.GetComponent<DungeonTile>().y = y;
+                tiles.Add(tmpTile.GetComponent<DungeonTile>());
+                tmpTile.name = x + " | " + y;
+                if (x == gridX / 2 && y == gridY / 2)
+                {
+                    roomList.Add(tmpTile.GetComponent<DungeonTile>()); 
+                    tmpTile.GetComponent<DungeonTile>().occupied = true;
+                }
+            }
+        }
+
+        Vector2 center = new Vector2(gridX / 2, gridY / 2);
+        currentTile = center;
+        checkTile = currentTile;
+
+        oldTile = roomList[0];
+        StartCoroutine(startGeneration());
+        StartTileGeneration(roomList[roomCount]);
+    }
+    
+    void StartTileGeneration(DungeonTile tile)
+    {
+        int random = Random.Range(1, 5);
+
+        switch (random)
+        {
+            case 1:
+                //Up
+                FindTile(checkTile.x , checkTile.y + 1, 1);
+                break;
+            case 2:
+                //Right
+                FindTile(checkTile.x + 1, checkTile.y, 2);
+                break;
+            case 3:
+                //Down
+                FindTile(checkTile.x , checkTile.y - 1, 3);
+                break;
+            case 4:
+                //Left
+                FindTile(checkTile.x - 1, checkTile.y, 4);
+                break;
+        }
+    }
+
+    public void FindTile(float x, float y, int dir)
+    {
+
+        foreach (var item in tiles)
+        {
+            if (x == item.x && y == item.y)
+            {
+                if (!item.occupied && roomCount <= DungeonAmount)
+                {
+                    roomCount++;
+                    if (dir == 3)
+                        oldTile.Bottom = true;
+                    else if (dir == 4)
+                        oldTile.Left = true;
+                    else if (dir == 1)
+                        oldTile.Top = true;
+                    else if (dir == 2)
+                        oldTile.Right = true;
+                    item.roomCount = roomCount;
+                    currentTile.x = item.x;
+                    currentTile.y = item.y;
+                    checkTile = currentTile;
+                    item.occupied = true;
+                    roomList.Add(item);
+                    oldTile = item;
+                }
+            }
+        }
+        lastdir = dir;
+        if (roomCount < DungeonAmount)
+            StartTileGeneration(roomList[roomCount - 1]);
+    }
+
+    IEnumerator startGeneration()
+    {
+        //Startloading and creating the grid
+        Debug.Log("Loadinggg");
+        yield return new WaitForSeconds(3);
+        foreach (var item in roomList)
+        {
+            item.CheckNextRoom();
+        }
+        yield return new WaitForSeconds(1);
+        foreach (var item in roomList)
+        {
+            item.spawnTile();
+        }
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            Destroy(tiles[i].gameObject);
+        }
+        tiles.Clear();
+
+        //Done Loading --Start game--
+        GameSetup();
+        Debug.Log("Dungeon Generated!!!");
+    }
+
+    private void GameSetup()
+    {
+        FindObjectOfType<PlayerMovement>().gameObject.transform.position = roomList[0].transform.position;
+    }
+}

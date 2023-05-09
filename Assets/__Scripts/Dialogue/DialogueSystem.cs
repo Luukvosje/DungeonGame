@@ -59,6 +59,7 @@ public class DialogueSystem : MonoBehaviour
     private void EndDialogue()
     {
         anim.SetBool("IsOpen", false);
+        FindObjectOfType<PlayerMovement>().talking = false;
     }
 
     private void Update()

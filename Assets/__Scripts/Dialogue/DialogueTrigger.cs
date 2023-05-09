@@ -8,12 +8,7 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
+        FindObjectOfType<PlayerMovement>().talking = true;
         FindObjectOfType<DialogueSystem>().StartDialogueSystem(dialogue);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-            TriggerDialogue();
     }
 }
