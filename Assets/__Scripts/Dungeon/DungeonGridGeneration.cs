@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DungeonGridGeneration : MonoBehaviour
 {
@@ -19,14 +20,20 @@ public class DungeonGridGeneration : MonoBehaviour
     private DungeonTile oldTile;
     public int lastdir = 0;
 
+    //Animation
+    [SerializeField] private Animator loadingScreen;
+    private bool LoadingTerrain = false;
+
 
     void Start()
     {
         //Zorgt ervoor dat er niet meer kamers kunnen zijn dan gridtiles
+        LoadingTerrain = true;
         gridX = DungeonAmount;
         gridY = DungeonAmount;
         roomCount = 0;
         FindObjectOfType<DungeonManager>().endRoom = DungeonAmount;
+        FindObjectOfType<PlayerMovement>().canWalk = false;
 
         for (int x = 0; x < gridX; x++)
         {
@@ -121,6 +128,7 @@ public class DungeonGridGeneration : MonoBehaviour
         {
             item.CheckNextRoom();
         }
+        GameSetup();
         yield return new WaitForSeconds(1);
         foreach (var item in roomList)
         {
@@ -131,14 +139,17 @@ public class DungeonGridGeneration : MonoBehaviour
             Destroy(tiles[i].gameObject);
         }
         tiles.Clear();
-
+        yield return new WaitForSeconds(1);
+        loadingScreen.SetBool("End", true);
+        LoadingTerrain = false;
         //Done Loading --Start game--
-        GameSetup();
+        FindObjectOfType<PlayerMovement>().canWalk = true;
         Debug.Log("Dungeon Generated!!!");
     }
 
     private void GameSetup()
     {
+
         FindObjectOfType<PlayerMovement>().gameObject.transform.position = roomList[0].transform.position;
     }
 }

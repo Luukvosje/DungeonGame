@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Vector2 movementVector;
     [SerializeField] private float speed;
+    public bool canWalk = false;
 
     [Header("Animations")]
     [SerializeField] private Animator playerAnim;
@@ -37,12 +38,14 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         weaponController = GetComponent<WeaponController>();
+        canWalk = true;
     }
 
     private void Update()
     {
         //MovementInput
-        Movement();
+        if (canWalk)
+            Movement();
     }
     private void FixedUpdate()
     {
