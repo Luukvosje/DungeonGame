@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class ItemHolder : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    [SerializeField] private Transform parentAfterDrag;
-    private Image image;
     private InventoryManager manager;
+
+    private Image image;
+    public TextMeshProUGUI countText;
+
+
     private bool holdingitem;
+    public int count = 1;
+
+    [SerializeField] private Transform parentAfterDrag;
     [HideInInspector] public Item ContainingItem;
 
 
@@ -19,13 +26,22 @@ public class ItemHolder : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         image = GetComponent<Image>();
     }
 
+    public void RefreshCount()
+    {
+        countText.text = count.ToString();
+        bool textActive = count > 1;
+        countText.gameObject.SetActive(textActive);
+    }
+
     public void OnBeginDrag(PointerEventData eventdata)
     {
         if (transform.GetComponentInParent<InventoryTile>().ContainingItem && !manager.holdingItemWithMouse)
         {
             manager.holdingItemWithMouse = GetComponentInParent<InventoryTile>().ItemHolding;
             image.raycastTarget = false;
+            transform.GetChild(0).GetComponent<TextMeshProUGUI>().raycastTarget = false;
             manager.tileclicked = GetComponentInParent<InventoryTile>();
+            manager.tileclickedItemHolder = this;
             parentAfterDrag = transform.parent;
             transform.SetParent(transform.root);
             holdingitem = true;
@@ -49,14 +65,18 @@ public class ItemHolder : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             {
                 manager.tileclicked.ContainingItem = false;
             }
-            manager.selectedItemSlot.GetComponent<InventoryTile>().ItemHolding = manager.holdingItemWithMouse;
-            manager.holdingItemWithMouse = null;
-            manager.tileclicked = null;
-            image.raycastTarget = true;
 
             transform.SetParent(manager.selectedItemSlot.transform);
             manager.selectedItemSlot.transform.GetChild(0).SetParent(parentAfterDrag);
-            holdingitem = false;
+            manager.selectedItemSlot.GetComponent<InventoryTile>().ItemHolding = manager.holdingItemWithMouse;
         }
+
+        manager.holdingItemWithMouse = null;
+        manager.tileclicked = null;
+        image.raycastTarget = true;
+        transform.GetChild(0).GetComponent<TextMeshProUGUI>().raycastTarget = true;
+
+
+        holdingitem = false;
     }
 }

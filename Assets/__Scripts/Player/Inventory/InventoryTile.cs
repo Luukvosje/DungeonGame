@@ -7,12 +7,12 @@ using TMPro;
 
 public class InventoryTile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public bool Activated = false;
     private InventoryManager manager;
 
-    public bool ContainingItem = false;
-
     public Item ItemHolding;
+
+    public bool Activated = false;
+    public bool ContainingItem = false;
 
     private void Start()
     {

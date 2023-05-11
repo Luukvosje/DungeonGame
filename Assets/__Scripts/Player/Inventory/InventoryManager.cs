@@ -16,6 +16,8 @@ public class InventoryManager : MonoBehaviour
     public List<GameObject> InventorySlots = new List<GameObject>();
     public Item holdingItemWithMouse = null;
     public InventoryTile tileclicked;
+    public ItemHolder tileclickedItemHolder;
+    public int maxStackedItems = 50;
 
     public bool InventoryActived;
     private Transform inventoryCanvas;
@@ -78,7 +80,8 @@ public class InventoryManager : MonoBehaviour
 
     private void GiveItem(int id)
     {
-        int inventoryNumber = GetFirstEmptyInventorySlot() ;
+        int inventoryNumber = GetFirstEmptyInventorySlot(id) ;
+        Debug.Log(inventoryNumber);
         if (inventoryNumber == 100)
         {
             Debug.Log("Inventory Full");
@@ -87,9 +90,20 @@ public class InventoryManager : MonoBehaviour
         InventorySlots[inventoryNumber].GetComponent<InventoryTile>().AssignNewItemToSlot(_Items[id]);
     }
 
-    private int GetFirstEmptyInventorySlot()
+    private int GetFirstEmptyInventorySlot(int id)
     {
         int inventoryNumber = 0;
+        foreach (var item in InventorySlots)
+        {
+            if (item.GetComponent<InventoryTile>().ContainingItem && item.GetComponent<InventoryTile>().ItemHolding.id == id && item.GetComponent<InventoryTile>().ItemHolding.Stackable && item.transform.GetChild(0).GetComponent<ItemHolder>().count < maxStackedItems)
+            {
+                item.transform.GetChild(0).GetComponent<ItemHolder>().count++;
+                item.transform.GetChild(0).GetComponent<ItemHolder>().RefreshCount();
+                return inventoryNumber;
+            }
+            inventoryNumber++;
+        }
+        inventoryNumber = 0;
         foreach (var item in InventorySlots)
         {
             if (!item.GetComponent<InventoryTile>().ContainingItem)
@@ -116,7 +130,8 @@ public class InventoryManager : MonoBehaviour
                 hotbar.state = ActionType.Attack;
                 hotbar.transform.GetChild(0).GetComponent<Image>().color = new Color(1,1,1,0);
                 hotbar.transform.GetChild(0).GetComponent<Image>().sprite = null;
-                Debug.Log("SLotFilled");
+                hotbar.count = 1;
+                hotbar.RefreshCount();
             }
             else
             {
@@ -124,7 +139,9 @@ public class InventoryManager : MonoBehaviour
                 hotbar.state = hotbar.Item.actionType;
                 hotbar.transform.GetChild(0).GetComponent<Image>().sprite = hotbar.ItemSprite;
                 hotbar.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, 1);
-                Debug.Log("Slot Empty");
+                hotbar.count = HotBarSlots[i].transform.GetComponentInChildren<ItemHolder>().count;
+                hotbar.RefreshCount();
+
                 weaponController.SwitchHotBarItem(i);
             }
         }
@@ -144,6 +161,8 @@ public class InventoryManager : MonoBehaviour
             }
             HotBarSlots[i].GetComponent<InventoryTile>().ItemHolding.itemSprite = hotbar.Item.itemSprite;
             HotBarSlots[i].transform.GetChild(0).GetComponent<Image>().sprite = hotbar.Item.itemSprite;
+            HotBarSlots[i].transform.GetChild(0).GetComponent<ItemHolder>().count = hotbar.count;
+            HotBarSlots[i].transform.GetChild(0).GetComponent<ItemHolder>().RefreshCount();
         }
         foreach (var item in InventorySlots)
         {
