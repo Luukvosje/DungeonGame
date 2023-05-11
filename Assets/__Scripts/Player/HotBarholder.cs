@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class HotBarholder : MonoBehaviour
 {
-    public Sprite Item;
-    public Tools state;
+    public Sprite ItemSprite;
+    public Item Item;
+    public ActionType state;
 
 }

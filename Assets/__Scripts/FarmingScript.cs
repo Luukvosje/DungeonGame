@@ -23,7 +23,8 @@ public class FarmingScript : MonoBehaviour
     {
         if (Vector2.Distance(controller.transform.position, transform.position) < controller.farmingRange)
         {
-            if (controller.currentToolState == Tools.Farming)
+            //Planting 
+            if (controller.currentToolState == ActionType.Plant)
             {
                 if (!occupied)
                     GetComponent<SpriteRenderer>().sprite = controller.hoveringSprite;
@@ -39,7 +40,8 @@ public class FarmingScript : MonoBehaviour
                     GetComponent<SpriteRenderer>().sprite = null;
                 }
             }
-            if (controller.currentToolState == Tools.Harvesting && grown)
+            //Harvesting Crops
+            if (controller.currentToolState == ActionType.Farm && grown)
             {
                 GetComponent<SpriteRenderer>().sprite = controller.hoveringSprite;
                 if (Input.GetMouseButton(0) && occupied)
@@ -83,6 +85,5 @@ public class FarmingScript : MonoBehaviour
         seedSpriteHolder.GetComponent<SpriteRenderer>().sprite = null;
         seedState = 0;
         occupied = false;
-
     }
 }

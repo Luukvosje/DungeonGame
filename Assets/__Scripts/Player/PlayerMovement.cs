@@ -50,8 +50,11 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //MovementOutput
-        rb.velocity = movementVector.normalized * speed * Time.fixedDeltaTime;
-        WalkAnimationManager();
+        if (canWalk)
+        {
+            rb.velocity = movementVector.normalized * speed * Time.fixedDeltaTime;
+            WalkAnimationManager();
+        }
     }
 
     private void Movement()
@@ -111,6 +114,13 @@ public class PlayerMovement : MonoBehaviour
         }
         //else
         //    playerAnim.SetBool("StandingStill", true);
+    }
+
+    public void StopWalking()
+    {
+        canWalk = false;
+        movementVector = Vector2.zero;
+        rb.velocity = Vector2.zero;
     }
 
 }

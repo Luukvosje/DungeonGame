@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class DungeonGridGeneration : MonoBehaviour
 {
@@ -32,33 +33,38 @@ public class DungeonGridGeneration : MonoBehaviour
         gridX = DungeonAmount;
         gridY = DungeonAmount;
         roomCount = 0;
-        FindObjectOfType<DungeonManager>().endRoom = DungeonAmount;
-        FindObjectOfType<PlayerMovement>().canWalk = false;
 
+        FindObjectOfType<PlayerMovement>().StopWalking();
+
+        TileGen();
+    }
+
+    private void TileGen()
+    {
         for (int x = 0; x < gridX; x++)
         {
             for (int y = 0; y < gridY; y++)
             {
-               GameObject tmpTile = Instantiate(gridHolder, new Vector3(0 + gridSpaceX * x, 0 + gridSpaceY * y, 0), Quaternion.identity);
+                GameObject tmpTile = Instantiate(gridHolder, new Vector3(0 + gridSpaceX * x, 0 + gridSpaceY * y, 0), Quaternion.identity);
                 tmpTile.GetComponent<DungeonTile>().x = x;
                 tmpTile.GetComponent<DungeonTile>().y = y;
                 tiles.Add(tmpTile.GetComponent<DungeonTile>());
                 tmpTile.name = x + " | " + y;
                 if (x == gridX / 2 && y == gridY / 2)
                 {
-                    roomList.Add(tmpTile.GetComponent<DungeonTile>()); 
+                    roomList.Add(tmpTile.GetComponent<DungeonTile>());
                     tmpTile.GetComponent<DungeonTile>().occupied = true;
                 }
             }
         }
-
+        Debug.Log(roomList.Count);
         Vector2 center = new Vector2(gridX / 2, gridY / 2);
         currentTile = center;
         checkTile = currentTile;
-
         oldTile = roomList[0];
         StartCoroutine(startGeneration());
         StartTileGeneration(roomList[roomCount]);
+
     }
     
     void StartTileGeneration(DungeonTile tile)
@@ -123,13 +129,13 @@ public class DungeonGridGeneration : MonoBehaviour
     {
         //Startloading and creating the grid
         Debug.Log("Loadinggg");
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(0.5f);
         foreach (var item in roomList)
         {
             item.CheckNextRoom();
         }
         GameSetup();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.3f);
         foreach (var item in roomList)
         {
             item.spawnTile();
@@ -142,6 +148,11 @@ public class DungeonGridGeneration : MonoBehaviour
         yield return new WaitForSeconds(1);
         loadingScreen.SetBool("End", true);
         LoadingTerrain = false;
+        FindObjectOfType<DungeonManager>().endRoom = roomList.Count;
+        if (roomList.Count < DungeonAmount)
+        {
+            SceneManager.LoadScene(1);
+        }
         //Done Loading --Start game--
         FindObjectOfType<PlayerMovement>().canWalk = true;
         Debug.Log("Dungeon Generated!!!");

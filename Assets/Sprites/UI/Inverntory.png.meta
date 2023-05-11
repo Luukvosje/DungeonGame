@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a7be77716e4d01e47abddcc3c71e82cf
+guid: 4293ae8541c66b44dbc3ebd65ca87362
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: inventory_0
+      name: Inverntory_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,19 +119,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1efdbad914dc56c4e89db693de8430e4
-      internalID: -681128345
+      spriteID: 7e5d4c1fee8fc5d469bdd7f755af727d
+      internalID: -1674467122
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: inventory_1
+      name: Inverntory_1
       rect:
         serializedVersion: 2
         x: 2
-        y: 19
-        width: 200
+        y: 17
+        width: 193
         height: 124
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8e9a14f9af54f044a1921b6fa8ccaec
-      internalID: -90485728
+      spriteID: dbcdd1785d534c8459f2f24a8ccd054e
+      internalID: -139790723
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: inventory_2
+      name: Inverntory_2
       rect:
         serializedVersion: 2
         x: 16
@@ -161,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e2aec6836ed04d43b83abb50f6c5e75
-      internalID: -833612786
+      spriteID: 170eb009842d57b4da9ef49f6e870962
+      internalID: 1521273034
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: inventory_3
+      name: Inverntory_3
       rect:
         serializedVersion: 2
         x: 32
@@ -182,8 +182,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f486392ac8d66294fb5cd5cf0c5abca6
-      internalID: 339352588
+      spriteID: de35ba3c71ce6994d944a04a93f03780
+      internalID: 2123712614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inverntory_4
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 170
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51e329e48b3733341abcb3c011bef05d
+      internalID: 720479413
       vertices: []
       indices: 
       edges: []
@@ -199,10 +220,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      inventory_1: -90485728
-      inventory_2: 1203881987
-      inventory_0: -681128345
-      inventory_3: -833612786
+      Inverntory_2: 1521273034
+      Inverntory_0: -1674467122
+      Inverntory_3: 2123712614
+      Inverntory_1: -139790723
+      Inverntory_4: 720479413
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

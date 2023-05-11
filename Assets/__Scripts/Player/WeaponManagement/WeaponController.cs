@@ -4,18 +4,17 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
-public enum Tools { Farming, Cutting, Mining, Harvesting, Fighting};
 
 public class WeaponController : MonoBehaviour
 {
     [Header("Linking")]
     [SerializeField] private GameObject hotbar;
     [SerializeField] private GameObject weaponRenderer;
-    [SerializeField] private List<GameObject> hotbarItems;
+    public List<GameObject> hotbarItems = new List<GameObject>();
     public static WeaponController instance;
 
     [Header("Tool Manager")]
-    public Tools currentToolState;
+    public ActionType currentToolState;
     [SerializeField] private GameObject currentHoldingItem;
     [SerializeField] private int hotbarNumber;
     private Vector3 oldPos, newPos, oldRot, newRot;
@@ -56,13 +55,13 @@ public class WeaponController : MonoBehaviour
         //States
         switch(currentToolState)
         {
-            case Tools.Farming:
+            case ActionType.Plant:
                 Debug.Log("Farming Mode");
                 break;
-            case Tools.Harvesting:
+            case ActionType.Farm:
                 Debug.Log("Harversting Mode");
                 break;
-            case Tools.Fighting:
+            case ActionType.Attack:
                 Debug.Log("Fighting Mode");
                 break;
         }
@@ -115,11 +114,17 @@ public class WeaponController : MonoBehaviour
             yield return null;
         }
     }
-    private void SwitchHotBarItem(int hotBarInt)
+    public void SwitchHotBarItem(int hotBarInt)
     {
         currentHoldingItem = hotbarItems[hotBarInt];
-        weaponRenderer.GetComponentInChildren<SpriteRenderer>().sprite = currentHoldingItem.GetComponent<HotBarholder>().Item;
+        weaponRenderer.GetComponentInChildren<SpriteRenderer>().sprite = currentHoldingItem.GetComponent<HotBarholder>().ItemSprite;
         currentToolState = currentHoldingItem.GetComponent<HotBarholder>().state;
         hotbarNumber = hotBarInt;
+        foreach (var item in hotbarItems)
+        {
+            item.GetComponent<Image>().sprite = FindObjectOfType<InventoryManager>().normalTile;
+        }
+        currentHoldingItem.GetComponent<Image>().sprite = FindObjectOfType<InventoryManager>().hoveringTile;
+        FindObjectOfType<FarmingManager>().ResetfarmingGrid();
     }
 }
