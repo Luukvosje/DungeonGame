@@ -35,10 +35,12 @@ public class InventoryTile : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         Activated = true;
         manager.selectedItemSlot = gameObject;
         GetComponent<Image>().sprite = manager.hoveringTile;
+        manager.hoveringOverItem = true;
     }
 
     public void OnPointerExit(PointerEventData pointerEventData)
     {
+        manager.hoveringOverItem = false;
         Activated = false;
         GetComponent<Image>().sprite = manager.normalTile;
     }

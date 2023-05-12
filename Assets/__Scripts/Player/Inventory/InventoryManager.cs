@@ -18,6 +18,8 @@ public class InventoryManager : MonoBehaviour
     public InventoryTile tileclicked;
     public ItemHolder tileclickedItemHolder;
     public int maxStackedItems = 50;
+    public ToolTip tooltip;
+    public bool hoveringOverItem;
 
     public bool InventoryActived;
     private Transform inventoryCanvas;
@@ -76,6 +78,11 @@ public class InventoryManager : MonoBehaviour
                 InventoryActived = true;
             }
         }
+        //ToolTip
+        if (hoveringOverItem && selectedItemSlot.GetComponent<InventoryTile>().ContainingItem && holdingItemWithMouse == null)
+            tooltip.isHovering = true;
+        else
+            tooltip.isHovering = false;
     }
 
     private void GiveItem(int id)
@@ -145,25 +152,11 @@ public class InventoryManager : MonoBehaviour
                 weaponController.SwitchHotBarItem(i);
             }
         }
+        weaponController.SwitchHotBarItem(weaponController.hotbarSlot);
     }
 
     public void SyncInventoryHotBar()
     {
-        //OpeningInventory
-        for (int i = 0; i < HotBarSlots.Count; i++)
-        {
-            HotBarholder hotbar = weaponController.hotbarItems[i].GetComponent<HotBarholder>();
-            HotBarSlots[i].GetComponent<InventoryTile>().ItemHolding = hotbar.Item;
-            if (!hotbar.Item)
-            {
-                hotbar.ItemSprite = null;
-                return;
-            }
-            HotBarSlots[i].GetComponent<InventoryTile>().ItemHolding.itemSprite = hotbar.Item.itemSprite;
-            HotBarSlots[i].transform.GetChild(0).GetComponent<Image>().sprite = hotbar.Item.itemSprite;
-            HotBarSlots[i].transform.GetChild(0).GetComponent<ItemHolder>().count = hotbar.count;
-            HotBarSlots[i].transform.GetChild(0).GetComponent<ItemHolder>().RefreshCount();
-        }
         foreach (var item in InventorySlots)
         {
             item.GetComponent<Image>().sprite = normalTile;
@@ -174,6 +167,49 @@ public class InventoryManager : MonoBehaviour
             item.GetComponent<Image>().sprite = normalTile;
             item.GetComponent<InventoryTile>().Activated = false;
         }
+        //OpeningInventory
+        for (int i = 0; i < HotBarSlots.Count; i++)
+        {
+            HotBarholder hotbar = weaponController.hotbarItems[i].GetComponent<HotBarholder>();
+            HotBarSlots[i].GetComponent<InventoryTile>().ItemHolding = hotbar.Item;
+            if (!hotbar.Item)
+            {
+                hotbar.ItemSprite = null;
+                HotBarSlots[i].transform.GetChild(0).GetComponent<Image>().sprite = null;
+                HotBarSlots[i].transform.GetChild(0).GetComponent<ItemHolder>().count = 1;
+                HotBarSlots[i].transform.GetChild(0).GetComponent<ItemHolder>().RefreshCount();
+                HotBarSlots[i].transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, 0);
+                HotBarSlots[i].GetComponent<InventoryTile>().ContainingItem = false;
+            }
+            else
+            {
 
+                HotBarSlots[i].GetComponent<InventoryTile>().ItemHolding.itemSprite = hotbar.Item.itemSprite;
+                HotBarSlots[i].transform.GetChild(0).GetComponent<Image>().sprite = hotbar.Item.itemSprite;
+                HotBarSlots[i].transform.GetChild(0).GetComponent<ItemHolder>().count = hotbar.count;
+                HotBarSlots[i].transform.GetChild(0).GetComponent<ItemHolder>().RefreshCount();
+            }
+        }
+
+    }
+
+    public void UseItem()
+    {
+        HotBarholder hotbarScript = weaponController.currentHoldingItem.GetComponentInChildren<HotBarholder>();
+        hotbarScript.count--;
+        hotbarScript.RefreshCount();
+
+        if(hotbarScript.count <= 0)
+        {
+            hotbarScript.count = 1;
+            weaponController.currentHoldingItem.transform.GetChild(0).GetComponent<Image>().sprite = null;
+            weaponController.currentHoldingItem.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, 0);
+            weaponController.currentHoldingItem = null;
+            hotbarScript.Item = null;
+            hotbarScript.ItemSprite = null;
+            hotbarScript.state = ActionType.Attack;
+            weaponController.currentToolState = ActionType.Attack;
+            weaponController.weaponRenderer.GetComponentInChildren<SpriteRenderer>().sprite = null;
+        }
     }
 }

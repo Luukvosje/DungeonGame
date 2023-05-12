@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FarmingScript : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class FarmingScript : MonoBehaviour
         if (Vector2.Distance(controller.transform.position, transform.position) < controller.farmingRange)
         {
             //Planting 
-            if (controller.currentToolState == ActionType.Plant)
+            if (controller.currentToolState == ActionType.Plant && controller.currentHoldingItem.GetComponent<HotBarholder>().count > 0)
             {
                 if (!occupied)
                     GetComponent<SpriteRenderer>().sprite = controller.hoveringSprite;
@@ -38,6 +39,7 @@ public class FarmingScript : MonoBehaviour
                     occupied = true;
                     seedSpriteHolder.GetComponent<SpriteRenderer>().sprite = controller.seedSpriteList[seedState];
                     GetComponent<SpriteRenderer>().sprite = null;
+                    FindObjectOfType<InventoryManager>().UseItem();
                 }
             }
             //Harvesting Crops

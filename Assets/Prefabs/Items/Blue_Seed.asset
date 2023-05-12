@@ -17,5 +17,5 @@ MonoBehaviour:
   itemSprite: {fileID: 994163494, guid: db94d7da493a1f04ea61b94a7be367b7, type: 3}
   type: 0
   actionType: 3
-  extraCondition: Seed
   Stackable: 1
+  extraText: use this seed to plant money

@@ -13,6 +13,7 @@ public class Item : ScriptableObject
     
     [Header("Extra's")]
     public bool Stackable;
+    public string extraText;
 
 }
 

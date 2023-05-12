@@ -9,16 +9,16 @@ public class WeaponController : MonoBehaviour
 {
     [Header("Linking")]
     [SerializeField] private GameObject hotbar;
-    [SerializeField] private GameObject weaponRenderer;
+    public GameObject weaponRenderer;
     public List<GameObject> hotbarItems = new List<GameObject>();
     public static WeaponController instance;
 
     [Header("Tool Manager")]
     public ActionType currentToolState;
-    [SerializeField] private GameObject currentHoldingItem;
+    public GameObject currentHoldingItem;
     [SerializeField] private int hotbarNumber;
     private Vector3 oldPos, newPos, oldRot, newRot;
-    private KeyCode[] hotbarKeys = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3 };
+    private KeyCode[] hotbarKeys = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6 };
 
     [Header("Farming Manager")]
     public Sprite hoveringSprite;
@@ -27,6 +27,7 @@ public class WeaponController : MonoBehaviour
 
     [Header("Manager")]
     public int _dayCount;
+    public int hotbarSlot =1 ;
 
     private void Awake()
     {
@@ -116,6 +117,7 @@ public class WeaponController : MonoBehaviour
     }
     public void SwitchHotBarItem(int hotBarInt)
     {
+        hotbarSlot = hotBarInt;
         currentHoldingItem = hotbarItems[hotBarInt];
         weaponRenderer.GetComponentInChildren<SpriteRenderer>().sprite = currentHoldingItem.GetComponent<HotBarholder>().ItemSprite;
         currentToolState = currentHoldingItem.GetComponent<HotBarholder>().state;

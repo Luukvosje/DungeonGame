@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4293ae8541c66b44dbc3ebd65ca87362
+guid: 01f09255c1a9ed74296f2eefc5a252da
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Inverntory_0
+      name: Inverntory 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e5d4c1fee8fc5d469bdd7f755af727d
-      internalID: -1674467122
+      spriteID: 768a1b97a5fcd174fa00aed4b91d54db
+      internalID: 538176449
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inverntory_1
+      name: Inverntory 1_1
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 154
+        width: 48
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1a51a15240d0ae4480289f8868cef22
+      internalID: -877360723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inverntory 1_2
       rect:
         serializedVersion: 2
         x: 2
@@ -140,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbcdd1785d534c8459f2f24a8ccd054e
-      internalID: -139790723
+      spriteID: bf57382ab9768bd4f84809e9999262af
+      internalID: 1096322822
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inverntory_2
+      name: Inverntory 1_3
       rect:
         serializedVersion: 2
         x: 16
@@ -161,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 170eb009842d57b4da9ef49f6e870962
-      internalID: 1521273034
+      spriteID: b972b804c236c684795a950784b017af
+      internalID: -830711928
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inverntory_3
+      name: Inverntory 1_4
       rect:
         serializedVersion: 2
         x: 32
@@ -182,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de35ba3c71ce6994d944a04a93f03780
-      internalID: 2123712614
+      spriteID: 1d0a4f88bffd4ea499ba06ed40dc4959
+      internalID: 82489423
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Inverntory_4
+      name: Inverntory 1_5
       rect:
         serializedVersion: 2
         x: 48
@@ -203,8 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51e329e48b3733341abcb3c011bef05d
-      internalID: 720479413
+      spriteID: 049ed6a333877314c92cfe2e93bae899
+      internalID: 1435009526
       vertices: []
       indices: 
       edges: []
@@ -220,11 +241,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Inverntory_2: 1521273034
-      Inverntory_0: -1674467122
-      Inverntory_3: 2123712614
-      Inverntory_1: -139790723
-      Inverntory_4: 720479413
+      Inverntory 1_2: 1096322822
+      Inverntory 1_4: 82489423
+      Inverntory 1_0: 538176449
+      Inverntory 1_3: -830711928
+      Inverntory 1_5: 1435009526
+      Inverntory 1_1: -877360723
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
