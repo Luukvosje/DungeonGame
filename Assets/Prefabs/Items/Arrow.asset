@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc17ef2edc2b01042b7a73e6ad259c02, type: 3}
-  m_Name: Sword
+  m_Name: Arrow
   m_EditorClassIdentifier: 
-  id: 4
-  name: Short_Sword
-  itemSprite: {fileID: -1123148188, guid: 7301d4940c973394a9f6e523916d6fc9, type: 3}
-  type: 2
-  actionType: 0
-  Stackable: 0
-  extraText: Short dagger to attack enemy's
+  id: 0
+  name: Arrow
+  itemSprite: {fileID: 1284634137, guid: ddec171989af91541a80e7d6fc11b9e4, type: 3}
+  type: 4
+  actionType: 1
+  Stackable: 1
+  extraText: Ammo for your bow

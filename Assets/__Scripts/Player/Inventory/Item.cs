@@ -22,7 +22,8 @@ public enum ItemType
     Crop,
     Consumable,
     Weapon,
-    Tool
+    Tool,
+    Misc,
 }
 public enum ActionType
 {
@@ -33,5 +34,7 @@ public enum ActionType
     Consume,
     Mine,
     Cut,
+    Ammo,
+    Throw
 }
 

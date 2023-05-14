@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc17ef2edc2b01042b7a73e6ad259c02, type: 3}
-  m_Name: Sword
+  m_Name: Red_Potion
   m_EditorClassIdentifier: 
-  id: 4
-  name: Short_Sword
-  itemSprite: {fileID: -1123148188, guid: 7301d4940c973394a9f6e523916d6fc9, type: 3}
-  type: 2
-  actionType: 0
+  id: 0
+  name: Red_Potion
+  itemSprite: {fileID: 259406013, guid: 7301d4940c973394a9f6e523916d6fc9, type: 3}
+  type: 1
+  actionType: 4
   Stackable: 0
-  extraText: Short dagger to attack enemy's
+  extraText: Use this to add 20 health to your hp

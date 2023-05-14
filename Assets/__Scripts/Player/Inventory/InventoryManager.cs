@@ -59,7 +59,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && FindObjectOfType<PlayerMovement>().InOverWorld)
         {
             if (InventoryActived)
             {

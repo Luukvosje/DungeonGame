@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("NPC / Interaction")]
     public bool talking;
 
+    [Header("LocationTracking")]
+    public bool InOverWorld, InDungeon;
 
     private void Awake()
     {

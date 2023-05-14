@@ -127,6 +127,7 @@ public class WeaponController : MonoBehaviour
             item.GetComponent<Image>().sprite = FindObjectOfType<InventoryManager>().normalTile;
         }
         currentHoldingItem.GetComponent<Image>().sprite = FindObjectOfType<InventoryManager>().hoveringTile;
-        FindObjectOfType<FarmingManager>().ResetfarmingGrid();
+        if(FindObjectOfType<PlayerMovement>().InOverWorld)
+            FindObjectOfType<FarmingManager>().ResetfarmingGrid();
     }
 }

@@ -50,6 +50,9 @@ TagManager:
   - name: Farming
     uniqueID: 3329345371
     locked: 0
+  - name: WeaponEffects
+    uniqueID: 2669861361
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
