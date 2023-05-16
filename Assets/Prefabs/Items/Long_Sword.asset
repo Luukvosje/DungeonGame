@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc17ef2edc2b01042b7a73e6ad259c02, type: 3}
   m_Name: Long_Sword
   m_EditorClassIdentifier: 
-  id: 0
+  id: 13
   name: Long_Sword
   itemSprite: {fileID: -1731135880, guid: 7301d4940c973394a9f6e523916d6fc9, type: 3}
   type: 2
   actionType: 0
   Stackable: 0
   extraText: Sword with longer range
+  AttackSpeed: 0.2

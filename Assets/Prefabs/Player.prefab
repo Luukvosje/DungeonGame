@@ -157,6 +157,7 @@ MonoBehaviour:
   rb: {fileID: 823282378378678971}
   movementVector: {x: 0, y: 0}
   speed: 100
+  canWalk: 0
   playerAnim: {fileID: 823282379301118181}
   spriteRenderer: {fileID: 823282379301118176}
   collided: 0
@@ -167,6 +168,8 @@ MonoBehaviour:
   lookingDir: 0
   lookdir: 0
   talking: 0
+  InOverWorld: 1
+  InDungeon: 0
 --- !u!114 &823282378378678972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,9 +188,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   currentToolState: 4
   currentHoldingItem: {fileID: 0}
   hotbarNumber: 1
+  oldPos: {x: 0, y: 0, z: 0}
+  newPos: {x: 0, y: 0, z: 0}
+  oldRot: {x: 0, y: 0, z: 0}
+  newRot: {x: 0, y: 0, z: 0}
   hoveringSprite: {fileID: 21300000, guid: b5d12a96c1a791e4894de242789c4889, type: 3}
   seedSpriteList:
   - {fileID: 1176754788, guid: 6fc94ec3ecc085747a84a1558bfa92c3, type: 3}
@@ -195,6 +205,10 @@ MonoBehaviour:
   - {fileID: -1071467643, guid: 6fc94ec3ecc085747a84a1558bfa92c3, type: 3}
   farmingRange: 3
   _dayCount: 0
+  hotbarSlot: 1
+  slashEffect: {fileID: 2844041999590549388, guid: 6315923a46acb304c8c0540d5501caed, type: 3}
+  weaponAnim: {fileID: 676776811}
+  slashMoveSpeed: 2
 --- !u!61 &823282378378678975
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -230,6 +244,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 823282378898387601}
+  - component: {fileID: 676776811}
   m_Layer: 0
   m_Name: WeaponRenderer
   m_TagString: Untagged
@@ -253,6 +268,26 @@ Transform:
   m_Father: {fileID: 823282378378678973}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!95 &676776811
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823282378898387614}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c6bca75321a2dd6489fce60c477036d9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &823282379301118176
 GameObject:
   m_ObjectHideFlags: 0

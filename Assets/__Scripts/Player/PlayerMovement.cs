@@ -105,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
         }
         //RayCollisionCheck();
     }
+
     //Stop Animation when collided
     private void RayCollisionCheck()
     {

@@ -195,7 +195,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &33613279
@@ -1683,6 +1683,10 @@ PrefabInstance:
     - target: {fileID: 823282378378678968, guid: 459e021b5d8e9614d89c5baa579ebdd3, type: 3}
       propertyPath: InDungeon
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 823282378378678968, guid: 459e021b5d8e9614d89c5baa579ebdd3, type: 3}
+      propertyPath: InOverWorld
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 823282378378678969, guid: 459e021b5d8e9614d89c5baa579ebdd3, type: 3}
       propertyPath: m_Name

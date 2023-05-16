@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc17ef2edc2b01042b7a73e6ad259c02, type: 3}
   m_Name: Spear
   m_EditorClassIdentifier: 
-  id: 0
+  id: 19
   name: Spear
   itemSprite: {fileID: -1614482298, guid: 7301d4940c973394a9f6e523916d6fc9, type: 3}
   type: 2
   actionType: 0
   Stackable: 0
   extraText: Long strong spear
+  AttackSpeed: 0.2

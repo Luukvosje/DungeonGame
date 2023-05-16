@@ -19,3 +19,4 @@ MonoBehaviour:
   actionType: 0
   Stackable: 0
   extraText: The legendary sword used be the king
+  AttackSpeed: 2

@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class SwordSlashEffect : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private WeaponController controller;
+    private Rigidbody2D rb;
+    private Animator anim;
+    
     void Start()
     {
-        
+        controller = FindObjectOfType<WeaponController>();
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+
+        rb.velocity = transform.right * controller.slashMoveSpeed;
+        anim.speed = 1;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DestroySelf()
     {
-        
+        Destroy(gameObject);
     }
 }

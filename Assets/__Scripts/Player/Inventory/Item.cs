@@ -15,6 +15,10 @@ public class Item : ScriptableObject
     public bool Stackable;
     public string extraText;
 
+    [Header("WeaponSpecs")]
+    public float AttackSpeed;
+    public float AnimationSpeed;
+
 }
 
 public enum ItemType

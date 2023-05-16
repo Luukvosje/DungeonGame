@@ -17,7 +17,7 @@ public class WeaponController : MonoBehaviour
     public ActionType currentToolState;
     public GameObject currentHoldingItem;
     [SerializeField] private int hotbarNumber;
-    private Vector3 oldPos, newPos, oldRot, newRot;
+    [HideInInspector] public Vector3 oldPos, newPos, oldRot, newRot;
     private KeyCode[] hotbarKeys = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6 };
 
     [Header("Farming Manager")]
@@ -29,6 +29,15 @@ public class WeaponController : MonoBehaviour
     public int _dayCount;
     public int hotbarSlot =1 ;
 
+    [Header("WeaponManager")]
+    [SerializeField] private SwordSlashEffect slashEffect;
+    [SerializeField] private Animator weaponAnim;
+    public float slashMoveSpeed;
+    public bool attacking = false;
+    private float reloadSpeedForWeapon;
+    private float attackspeed;
+    [SerializeField] private bool alreadyAttacking = false;
+
     private void Awake()
     {
         instance = this;
@@ -36,6 +45,7 @@ public class WeaponController : MonoBehaviour
     }
     private void Start()
     {
+        alreadyAttacking = false;
         if (!currentHoldingItem)
             SwitchHotBarItem(0);
 
@@ -63,12 +73,28 @@ public class WeaponController : MonoBehaviour
                 Debug.Log("Harversting Mode");
                 break;
             case ActionType.Attack:
-                Debug.Log("Fighting Mode");
+                if (Input.GetMouseButtonDown(0) && alreadyAttacking == false && currentHoldingItem.GetComponent<HotBarholder>().Item)
+                {
+                    //LeftClick
+                    StartCoroutine(Attacking());
+                }
                 break;
         }
 
         if (Input.GetKeyDown(KeyCode.K))
             _dayCount++;
+    }
+
+    private IEnumerator Attacking()
+    {
+        alreadyAttacking = true;
+        weaponAnim.speed = currentHoldingItem.GetComponent<HotBarholder>().Item.AnimationSpeed;
+        Quaternion rotation = weaponRenderer.transform.rotation;
+        rotation *= Quaternion.Euler(0, 0, 90);
+        Instantiate(slashEffect, weaponRenderer.transform.position, rotation);
+        weaponAnim.SetTrigger("Attack");
+        yield return new WaitForSeconds(currentHoldingItem.GetComponent<HotBarholder>().Item.AttackSpeed);
+        alreadyAttacking = false;
     }
 
     public void ChangeWeaponPos(int newLook)
