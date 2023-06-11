@@ -20,3 +20,5 @@ MonoBehaviour:
   Stackable: 0
   extraText: Thicker swordd
   AttackSpeed: 0.2
+  AnimationSpeed: 0
+  Damage: 30

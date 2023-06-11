@@ -6,8 +6,6 @@ using TMPro;
 
 public class DialogueSystem : MonoBehaviour
 {
-    public Animator anim;
-
     public TextMeshProUGUI Name;
     public TextMeshProUGUI DialogueText;
 
@@ -15,6 +13,7 @@ public class DialogueSystem : MonoBehaviour
 
     private bool typing = false;
     private float waitTime = 0.08f;
+    [SerializeField] private Animator anim;
 
     public void StartDialogueSystem(Dialogue dialogue)
     {

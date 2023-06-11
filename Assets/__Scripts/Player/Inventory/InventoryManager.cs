@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     [Header("Linking")]
-    private WeaponController weaponController;
+    public WeaponController weaponController;
     public GameObject selectedItemSlot = null;
     public Sprite hoveringTile, normalTile;
+
+    public bool DungeonMode = false;
 
     public List<Item> _Items = new List<Item>();
 
@@ -32,12 +34,17 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
+        if (DungeonMode)
+        {
+            InventoryActived = false;
+        }
+        //SyncHotBar();
+        SyncInventoryHotBar();
+        SyncHotBar();
         AssignItems(_Items);
-        InventoryActived = false;
+        weaponController = FindObjectOfType<WeaponController>();
         inventoryCanvas = transform.GetChild(0);
         inventoryCanvas.gameObject.active = false;
-        weaponController = FindObjectOfType<WeaponController>();
-        SyncHotBar();
     }
 
     private void AssignItems(List<Item> items)
@@ -170,6 +177,9 @@ public class InventoryManager : MonoBehaviour
         //OpeningInventory
         for (int i = 0; i < HotBarSlots.Count; i++)
         {
+            Debug.Log(weaponController.hotbarItems[i].GetComponent<HotBarholder>());
+
+
             HotBarholder hotbar = weaponController.hotbarItems[i].GetComponent<HotBarholder>();
             HotBarSlots[i].GetComponent<InventoryTile>().ItemHolding = hotbar.Item;
             if (!hotbar.Item)

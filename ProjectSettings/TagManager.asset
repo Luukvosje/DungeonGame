@@ -7,6 +7,7 @@ TagManager:
   - Farming
   - DungeonSpawnPointsGen
   - DungeonRoom
+  - Enemy
   layers:
   - Default
   - TransparentFX

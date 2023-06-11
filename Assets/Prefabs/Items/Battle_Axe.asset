@@ -21,3 +21,4 @@ MonoBehaviour:
   extraText: Use this Weapon to slay your enemy's
   AttackSpeed: 0.4
   AnimationSpeed: 1
+  Damage: 40

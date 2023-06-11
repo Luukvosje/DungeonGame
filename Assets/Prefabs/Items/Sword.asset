@@ -21,3 +21,4 @@ MonoBehaviour:
   extraText: Short dagger to attack enemy's
   AttackSpeed: 0.2
   AnimationSpeed: 1
+  Damage: 30

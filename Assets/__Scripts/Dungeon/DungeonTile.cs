@@ -89,6 +89,7 @@ public class DungeonTile : MonoBehaviour
         else if(Left)
            tile =  Instantiate(L, transform.position, Quaternion.identity);
         tile.GetComponent<DungeonCameraFollow>().roomCount = roomCount;
+        tile.GetComponentInChildren<DungeonRoom>().AssignRoomStates();
     }
 
 }
