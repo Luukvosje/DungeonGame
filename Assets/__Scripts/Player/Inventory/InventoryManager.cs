@@ -37,10 +37,10 @@ public class InventoryManager : MonoBehaviour
         if (DungeonMode)
         {
             InventoryActived = false;
-        }
-        //SyncHotBar();
         SyncInventoryHotBar();
-        SyncHotBar();
+            SyncHotBar();
+        }
+
         AssignItems(_Items);
         weaponController = FindObjectOfType<WeaponController>();
         inventoryCanvas = transform.GetChild(0);

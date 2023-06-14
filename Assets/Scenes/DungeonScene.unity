@@ -570,7 +570,7 @@ MonoBehaviour:
   gridSpaceX: 24
   gridSpaceY: 16
   gridHolder: {fileID: 5723413153125212192, guid: faa40ee7377b37d4ab8c893cbdb77223, type: 3}
-  DungeonAmount: 10
+  DungeonAmount: 33
   tiles: []
   roomList: []
   currentTile: {x: 0, y: 0}

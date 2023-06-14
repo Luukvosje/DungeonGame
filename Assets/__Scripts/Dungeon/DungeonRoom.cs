@@ -71,6 +71,8 @@ public class DungeonRoom : MonoBehaviour
         {
             CloseDoors();
             FindObjectOfType<PlayerMovement>().currentRoom = this;
+            if (roomState == roomState.Boss)
+                FindObjectOfType<LevelLoader>().LoadNextLevel(0);
         }
     }
 
