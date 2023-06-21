@@ -29,7 +29,7 @@ public class InventoryManager : MonoBehaviour
     //Temp
     [Header("Hotbar")]
     public List<GameObject> HotBarSlots = new List<GameObject>();
-    private KeyCode[] hotbarKeys = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6};
+    //private KeyCode[] hotbarKeys = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.Alpha5, KeyCode.Alpha6};
 
 
     private void Start()
@@ -39,6 +39,16 @@ public class InventoryManager : MonoBehaviour
             InventoryActived = false;
         SyncInventoryHotBar();
             SyncHotBar();
+        }
+        else
+        {
+            //Giving Hoe to player
+            GiveItem(11);
+
+            for (int i = 0; i < 5; i++)
+            {
+                GiveItem(4);
+            }
         }
 
         AssignItems(_Items);
@@ -57,14 +67,14 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < hotbarKeys.Length; i++)
-        {
-            if (Input.GetKeyDown(hotbarKeys[i]))
-            {
-                GiveItem(_Items[i].id);
-                return;
-            }
-        }
+        //for (int i = 0; i < hotbarKeys.Length; i++)
+        //{
+        //    if (Input.GetKeyDown(hotbarKeys[i]))
+        //    {
+        //        GiveItem(_Items[i].id);
+        //        return;
+        //    }
+        //}
 
         if (Input.GetKeyDown(KeyCode.Tab) && FindObjectOfType<PlayerMovement>().InOverWorld)
         {
