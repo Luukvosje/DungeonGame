@@ -25,8 +25,13 @@ public class ShopManager : MonoBehaviour
     public void BuyHelmet1()
     {
         // check if enough gold then remove gold
-
+        if (VariableScript.instance.money > 0)
+        {
+            VariableScript.instance.money -= 1;
+            
+        }
         // add to invertory
+
     }
     public void BuyHelmet2()
     {

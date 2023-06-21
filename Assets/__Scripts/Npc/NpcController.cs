@@ -8,11 +8,14 @@ public class NpcController : MonoBehaviour
     private DialogueTrigger dialogueTrigger;
     private Animator anim;
     private bool inRange;
+
+    public GameObject shop;
     // Start is called before the first frame update
     void Start()
     {
         dialogueTrigger = GetComponent<DialogueTrigger>();
         anim = transform.GetChild(0).GetComponent<Animator>();
+        shop.SetActive(false);
     }
 
     private void Update()
@@ -20,6 +23,7 @@ public class NpcController : MonoBehaviour
         if (inRange && Input.GetKeyDown(KeyCode.E) && !FindObjectOfType<PlayerMovement>().talking)
         {
             dialogueTrigger.TriggerDialogue();
+            shop.SetActive(true);
         }
     }
 
