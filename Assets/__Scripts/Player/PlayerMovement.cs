@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("LocationTracking")]
     public bool InOverWorld, InDungeon;
 
+    public DungeonRoom currentRoom;
+
     private void Awake()
     {
         instance = this;

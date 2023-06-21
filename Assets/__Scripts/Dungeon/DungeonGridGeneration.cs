@@ -10,7 +10,7 @@ public class DungeonGridGeneration : MonoBehaviour
     [SerializeField] private int gridSpaceX, gridSpaceY;
     [SerializeField] private GameObject gridHolder;
 
-    [SerializeField] private int DungeonAmount;
+    public int DungeonAmount;
     private int roomCount;
 
     public List<DungeonTile> tiles = new List<DungeonTile>();
@@ -148,7 +148,7 @@ public class DungeonGridGeneration : MonoBehaviour
         yield return new WaitForSeconds(1);
         loadingScreen.SetBool("End", true);
         LoadingTerrain = false;
-        FindObjectOfType<DungeonManager>().endRoom = roomList.Count;
+        FindObjectOfType<DungeonManager>().endRoom = roomList.Count -1;
         if (roomList.Count < DungeonAmount)
         {
             SceneManager.LoadScene(1);

@@ -20,3 +20,5 @@ MonoBehaviour:
   Stackable: 0
   extraText: The legendary sword used be the king
   AttackSpeed: 2
+  AnimationSpeed: 0
+  Damage: 50

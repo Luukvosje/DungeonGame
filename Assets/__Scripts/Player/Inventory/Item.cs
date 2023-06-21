@@ -18,6 +18,7 @@ public class Item : ScriptableObject
     [Header("WeaponSpecs")]
     public float AttackSpeed;
     public float AnimationSpeed;
+    public float Damage;
 
 }
 

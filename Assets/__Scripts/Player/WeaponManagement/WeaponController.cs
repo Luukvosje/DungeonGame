@@ -73,9 +73,10 @@ public class WeaponController : MonoBehaviour
                 Debug.Log("Harversting Mode");
                 break;
             case ActionType.Attack:
-                if (Input.GetMouseButtonDown(0) && alreadyAttacking == false && currentHoldingItem.GetComponent<HotBarholder>().Item)
+                if (Input.GetMouseButtonDown(0) && alreadyAttacking == false && currentHoldingItem.GetComponent<HotBarholder>().Item && !FindObjectOfType<InventoryManager>().InventoryActived)
                 {
                     //LeftClick
+                    StopAllCoroutines();
                     StartCoroutine(Attacking());
                 }
                 break;
@@ -88,12 +89,17 @@ public class WeaponController : MonoBehaviour
     private IEnumerator Attacking()
     {
         alreadyAttacking = true;
+        attacking = true;
         weaponAnim.speed = currentHoldingItem.GetComponent<HotBarholder>().Item.AnimationSpeed;
         Quaternion rotation = weaponRenderer.transform.rotation;
         rotation *= Quaternion.Euler(0, 0, 90);
         Instantiate(slashEffect, weaponRenderer.transform.position, rotation);
-        weaponAnim.SetTrigger("Attack");
+        if (weaponAnim.gameObject.activeSelf)
+        {
+            weaponAnim.SetTrigger("Attack");
+        }
         yield return new WaitForSeconds(currentHoldingItem.GetComponent<HotBarholder>().Item.AttackSpeed);
+        attacking = false;
         alreadyAttacking = false;
     }
 
@@ -156,4 +162,5 @@ public class WeaponController : MonoBehaviour
         if(FindObjectOfType<PlayerMovement>().InOverWorld)
             FindObjectOfType<FarmingManager>().ResetfarmingGrid();
     }
+
 }

@@ -8,6 +8,8 @@ public class DungeonManager : MonoBehaviour
     public CinemachineVirtualCamera camera;
     public int currentRoom;
     public int endRoom;
+
+    public List<GameObject> enemys = new List<GameObject>(); 
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,9 @@ public class DungeonManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (currentRoom == endRoom)
+        {
+            
+        }
     }
 }

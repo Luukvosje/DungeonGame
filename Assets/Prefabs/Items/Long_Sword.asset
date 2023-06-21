@@ -20,3 +20,5 @@ MonoBehaviour:
   Stackable: 0
   extraText: Sword with longer range
   AttackSpeed: 0.2
+  AnimationSpeed: 0
+  Damage: 30

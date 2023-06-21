@@ -2993,9 +2993,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173b2ab649ac55348b231ec2dc3db4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 419385259}
   Name: {fileID: 813157252}
   DialogueText: {fileID: 351706147}
+  anim: {fileID: 419385259}
 --- !u!4 &1502911629
 Transform:
   m_ObjectHideFlags: 0
