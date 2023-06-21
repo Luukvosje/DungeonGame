@@ -19,6 +19,7 @@ public class NpcController : MonoBehaviour
     {
         if (inRange && Input.GetKeyDown(KeyCode.E) && !FindObjectOfType<PlayerMovement>().talking)
         {
+            //Opening shop
             dialogueTrigger.TriggerDialogue();
         }
     }

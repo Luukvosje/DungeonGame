@@ -570,7 +570,7 @@ MonoBehaviour:
   gridSpaceX: 24
   gridSpaceY: 16
   gridHolder: {fileID: 5723413153125212192, guid: faa40ee7377b37d4ab8c893cbdb77223, type: 3}
-  DungeonAmount: 10
+  DungeonAmount: 5
   tiles: []
   roomList: []
   currentTile: {x: 0, y: 0}
@@ -1196,6 +1196,10 @@ PrefabInstance:
     - target: {fileID: 4600836981192147042, guid: a368af8e644205344a61b16f3b8b6eda, type: 3}
       propertyPath: m_Name
       value: PlayerCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600836981192147042, guid: a368af8e644205344a61b16f3b8b6eda, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4600836981192147046, guid: a368af8e644205344a61b16f3b8b6eda, type: 3}
       propertyPath: m_Pivot.x

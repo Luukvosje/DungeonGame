@@ -39,14 +39,17 @@ public class DungeonRoom : MonoBehaviour
             spikes.SetActive(false);
         }
         doorsOpened = false;
-        for (int i = 0; i < Random.Range(2, 5); i++)
+        if (roomState == roomState.Fight)
         {
-            Vector2 randomPos = new Vector2(Random.Range(transform.position.x - 2, transform.position.x + 2), Random.Range(transform.position.y - 2, transform.position.y + 2));
-            GameObject enemy = Instantiate(manager.enemys[Random.Range(0, manager.enemys.Count)], randomPos, Quaternion.identity);
-            RoomEnemys.Add(enemy);
-            if (enemy.GetComponent<ZombieBehavior>())
-                enemy.GetComponent<ZombieBehavior>().speed = Random.Range(1f, 2f);
-            needforKill++;
+            for (int i = 0; i < Random.Range(2, 5); i++)
+            {
+                Vector2 randomPos = new Vector2(Random.Range(transform.position.x - 2, transform.position.x + 2), Random.Range(transform.position.y - 2, transform.position.y + 2));
+                GameObject enemy = Instantiate(manager.enemys[Random.Range(0, manager.enemys.Count)], randomPos, Quaternion.identity);
+                RoomEnemys.Add(enemy);
+                if (enemy.GetComponent<ZombieBehavior>())
+                    enemy.GetComponent<ZombieBehavior>().speed = Random.Range(1f, 2f);
+                needforKill++;
+            }
         }
         foreach (var item in RoomEnemys)
         {
